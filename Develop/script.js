@@ -1,36 +1,45 @@
-// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-
-
-// Write password to the #password input
-function writePassword(length, criteria) {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  var pwdCriteria = prompt("Criteria for password? (Enter: 'U' for uppercase, 'L' for lowercase, 'N' for numbers, and an 'S' for symbols)")
-  var pwdLength = prompt("Length of password?")
+function generatePassword() {
+  var pwdCriteria = prompt("Criteria for password? (Enter: 'U' for uppercase, 'L' for lowercase, 'N' for numbers, and an 'S' for symbols)");
+  var pwdLength = prompt("How long does the password need to be? (Enter a number between 8-128)");
   var specs = '';
+  var pwd = '';
 
-  if (pwdCriteria.includes('U')) {
-    specs += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  } else if (pwdCriteria.includes('L')) {
-    specs += 'abcdefghijklmnopqrstuvwxyz'
-  } else if (pwdCriteria.includes('N')) {
-    specs += '0123456789'
-  } else if (pwdCriteria.includes('S')) {
-    specs += '!@#$%^&*()'
+  if (pwdLength < 8 || pwdLength > 128) {
+    alert("Invalid password length. Please enter a number between 8-128.");
+    return '';
   }
 
-  if (pwdLength)
+  if (pwdCriteria.includes('U')) {
+    specs += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  }
+  if (pwdCriteria.includes('L')) {
+    specs += 'abcdefghijklmnopqrstuvwxyz';
+  }
+  if (pwdCriteria.includes('N')) {
+    specs += '0123456789';
+  }
+  if (pwdCriteria.includes('S')) {
+    specs += '!@#$%^&*()';
+  }
+  if (specs === '') {
+    alert("No criteria selected. Please try again and choose at least one criteria. (Enter: 'U' for uppercase, 'L' for lowercase, 'N' for numbers, and an 'S' for symbols)");
+    return '';
+  }
 
-  passwordText.value = password;
-  
+  for (var i = 0; i < pwdLength; i++) {
+    var randomize = Math.floor(Math.random() * specs.length);
+    pwd += specs[randomize];
+  }
 
+  return pwd;
 }
 
-// Add event listener to generate button
+function writePassword(length,criteria) {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
+
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
