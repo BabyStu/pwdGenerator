@@ -6,4 +6,4 @@ https://github.com/BabyStu/pwdGenerator.git
 
 https://babystu.github.io/pwdGenerator/
 
-![screenshot of application](./Assets/screenshot.png)
+![screenshot of application](./assets/screenshot.png)
